@@ -17,6 +17,7 @@ public class TreePositions {
     public int getPosition() {
         return position;
     }
+
     public Plants getPlant() {
         return this.plant;
     }
@@ -24,7 +25,16 @@ public class TreePositions {
     public void setPlant(Plants plant) {
         this.plant = plant;
     }
+
     public void setPosition(int _pos) {
         this.position = _pos;
+    }
+
+    public void setTextColor(Color _textColor) {
+        textColor = _textColor;
+    }
+
+    public void setHumidity(int _hum) {
+        hum = _hum;
     }
 }

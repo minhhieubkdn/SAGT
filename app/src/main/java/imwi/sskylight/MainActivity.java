@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     MqttAndroidClient client;
 
     final int NUM_OF_PLANTS = 3;
+    final int NUM_OF_POTS = 4;
+
 
     private TextView tvConnectStt;
     private TextView tvDebug;
@@ -53,21 +55,21 @@ public class MainActivity extends AppCompatActivity {
     private Button btUpLoad;
     private Button btHome;
     private ImageButton btPlant[] = new ImageButton[NUM_OF_PLANTS];
-    private TextView[] tvDisplayPlants = new TextView[NUM_OF_PLANTS];
-    private TextView[] tvHumidity = new TextView[NUM_OF_PLANTS];
+    private TextView[] tvDisplayPlants = new TextView[NUM_OF_POTS];
+    private TextView[] tvHumidity = new TextView[NUM_OF_POTS];
     private Spinner spFloorNum;
-    private LinearLayout[] plantsLayout = new LinearLayout[NUM_OF_PLANTS];
+    private LinearLayout[] plantsLayout = new LinearLayout[NUM_OF_POTS];
     private EditText[] etMinHumidity = new EditText[NUM_OF_PLANTS];
 
     private Plants[] plants = new Plants[NUM_OF_PLANTS];
-    private TreePositions[] treePos = new TreePositions[NUM_OF_PLANTS*2];
-//    private Plants[] TreeInPots = new Plants[NUM_OF_PLANTS*2];
+    private TreePositions[] treePos = new TreePositions[NUM_OF_POTS * 2];
 
     Time currentTime = new Time();
 
-    int color1 = Color.rgb(3,169,244);
-    int color2 = Color.rgb(192,202,51);
-    int color3 = Color.rgb(249,168,37);
+    int color1 = Color.rgb(3, 169, 244);
+    int color2 = Color.rgb(192, 202, 51);
+    int color3 = Color.rgb(249, 168, 37);
+
     public int currentPos = 0;
     public int floorNum = 1;
     public boolean isInitializingPlants = false;
@@ -94,15 +96,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
     void allocateMemory() {
-        for(int i = 0; i < NUM_OF_PLANTS; i++) {
+        for (int i = 0; i < NUM_OF_PLANTS; i++) {
             plants[i] = new Plants();
         }
-        for(int i = 0; i < NUM_OF_PLANTS*2; i++) {
+        for (int i = 0; i < NUM_OF_POTS * 2; i++) {
             treePos[i] = new TreePositions();
             treePos[i].plant = new Plants();
         }
     }
+
     public void InitMQTTConnection() {
         String clientId = MqttClient.generateClientId();
         client = new MqttAndroidClient(this.getApplicationContext(), URI, clientId);
@@ -176,14 +180,14 @@ public class MainActivity extends AppCompatActivity {
             treePos[currentPos].hum = hum;
             treePos[currentPos].plant.humidity = hum;
             refreshNewFeed();
-            if(getCurrentFloor() == 1) {
+            if (getCurrentFloor() == 1) {
                 tvDebug.setText(Integer.toString(treePos[0].plant.getHumidity()) + "-" +
                         Integer.toString(treePos[1].plant.getHumidity()) + "-" +
-                        Integer.toString(treePos[2].plant.getHumidity()) );
+                        Integer.toString(treePos[2].plant.getHumidity()));
             } else {
                 tvDebug.setText(Integer.toString(treePos[3].plant.getHumidity()) + "-" +
                         Integer.toString(treePos[4].plant.getHumidity()) + "-" +
-                        Integer.toString(treePos[5].plant.getHumidity()) );
+                        Integer.toString(treePos[5].plant.getHumidity()));
             }
         }
 
@@ -241,31 +245,40 @@ public class MainActivity extends AppCompatActivity {
         this.btReadHumidity = (Button) findViewById(R.id.bt_read_humidity);
         this.btInitPlant = (Button) findViewById(R.id.bt_plant_id);
         this.btUpLoad = (Button) findViewById(R.id.bt_upload_id);
+        this.btHome = (Button) findViewById(R.id.bt_home);
         this.btPlant[0] = (ImageButton) findViewById(R.id.ib_plant_1_id);
         this.btPlant[1] = (ImageButton) findViewById(R.id.ib_plant_2_id);
         this.btPlant[2] = (ImageButton) findViewById(R.id.ib_plant_3_id);
         this.tvDisplayPlants[0] = (TextView) findViewById(R.id._tv_plant_name_1_id);
         this.tvDisplayPlants[1] = (TextView) findViewById(R.id._tv_plant_name_2_id);
         this.tvDisplayPlants[2] = (TextView) findViewById(R.id._tv_plant_name_3_id);
+        this.tvDisplayPlants[3] = (TextView) findViewById(R.id._tv_plant_name_4_id);
         this.tvHumidity[0] = (TextView) findViewById(R.id.tv_hum_1_id);
         this.tvHumidity[1] = (TextView) findViewById(R.id.tv_hum_2_id);
         this.tvHumidity[2] = (TextView) findViewById(R.id.tv_hum_3_id);
+        this.tvHumidity[3] = (TextView) findViewById(R.id.tv_hum_4_id);
         this.spFloorNum = (Spinner) findViewById(R.id.sp_floor_num_id);
         this.plantsLayout[0] = (LinearLayout) findViewById(R.id.ln_plant_1_id);
         this.plantsLayout[1] = (LinearLayout) findViewById(R.id.ln_plant_2_id);
         this.plantsLayout[2] = (LinearLayout) findViewById(R.id.ln_plant_3_id);
-        this.btHome = (Button) findViewById(R.id.bt_home);
+        this.plantsLayout[3] = (LinearLayout) findViewById(R.id.ln_plant_4_id);
         this.etMinHumidity[0] = (EditText) findViewById(R.id.et_min_humidity_1);
         this.etMinHumidity[1] = (EditText) findViewById(R.id.et_min_humidity_2);
         this.etMinHumidity[2] = (EditText) findViewById(R.id.et_min_humidity_3);
     }
 
     public void InitData() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < NUM_OF_PLANTS; i++) {
             switch (i) {
-                case 0: plants[i].setName("Xà lách"); break;
-                case 1: plants[i].setName("Rau cải"); break;
-                case 2: plants[i].setName("Mùng tơi");break;
+                case 0:
+                    plants[i].setName("Xà lách");
+                    break;
+                case 1:
+                    plants[i].setName("Rau cải");
+                    break;
+                case 2:
+                    plants[i].setName("Mùng tơi");
+                    break;
             }
             plants[i].setHour(7);
             plants[i].setMinute(30);
@@ -274,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
             plants[i].setHumidity(0);
             plants[i].id = i;
         }
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < NUM_OF_POTS * 2; i++) {
             treePos[i].setPosition(i);
             treePos[i].hum = 0;
             treePos[i].plant = plants[0];
@@ -292,20 +305,22 @@ public class MainActivity extends AppCompatActivity {
         etTimeToWater[0].setText(Integer.toString(plants[0].hour) + ":" + Integer.toString(plants[0].minute));
         etTimeToMeasure[0].setText(Integer.toString(plants[0].getTimeToMeasure()));
         etWaterDuration[0].setText(Integer.toString(plants[0].getWaterDuration()));
-        tvDisplayPlants[0].setText(plants[0].getName());
-        tvHumidity[0].setText(Integer.toString(plants[0].getHumidity()));
+        tvDisplayPlants[0].setText(treePos[0].plant.getName());
+        tvHumidity[0].setText(Integer.toString(0));
         etPlants[1].setText(plants[1].getName());
         etTimeToWater[1].setText(Integer.toString(plants[1].hour) + ":" + Integer.toString(plants[1].minute));
         etTimeToMeasure[1].setText(Integer.toString(plants[1].getTimeToMeasure()));
         etWaterDuration[1].setText(Integer.toString(plants[1].getWaterDuration()));
-        tvDisplayPlants[1].setText(plants[1].getName());
-        tvHumidity[1].setText(Integer.toString(plants[1].getHumidity()));
+        tvDisplayPlants[1].setText(treePos[1].plant.getName());
+        tvHumidity[1].setText(Integer.toString(0));
         etPlants[2].setText(plants[2].getName());
         etTimeToWater[2].setText(Integer.toString(plants[2].hour) + ":" + Integer.toString(plants[2].minute));
         etTimeToMeasure[2].setText(Integer.toString(plants[2].getTimeToMeasure()));
         etWaterDuration[2].setText(Integer.toString(plants[2].getWaterDuration()));
-        tvDisplayPlants[2].setText(plants[2].getName());
-        tvHumidity[2].setText(Integer.toString(plants[2].getHumidity()));
+        tvDisplayPlants[2].setText(treePos[2].plant.getName());
+        tvHumidity[2].setText(Integer.toString(0));
+        tvDisplayPlants[3].setText(treePos[3].plant.getName());
+        tvHumidity[3].setText(Integer.toString(0));
     }
 
     public void addActionFormWidgets() {
@@ -320,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Publish("home",PUBLIC_TOPIC);
+                Publish("home", PUBLIC_TOPIC);
             }
         });
     }
@@ -363,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
                     tvDebug.setText("start init plants");
                     v.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
                 } else {
-                    for ( int i = 0; i < NUM_OF_PLANTS; i++) {
+                    for (int i = 0; i < NUM_OF_PLANTS; i++) {
                         plants[i].isChoosing = false;
                     }
                     tvDebug.setText("exit init plants");
@@ -400,7 +415,7 @@ public class MainActivity extends AppCompatActivity {
                 String time;
                 String _garden = "g-";
                 getAllPlantsInfor();
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < NUM_OF_PLANTS; i++) {
                     treeInfor = "t" + Integer.toString(i + 1) + "-"
                             + plants[i].getTimeToWater() + ";"
                             + Integer.toString(plants[i].getTimeToMeasure()) + ";"
@@ -409,10 +424,10 @@ public class MainActivity extends AppCompatActivity {
 
                     Publish(treeInfor, PUBLIC_TOPIC);
                 }
-                for (int i = 0; i < 6; i++) {
+                for (int i = 0; i < NUM_OF_POTS*2; i++) {
                     _garden += treePos[i].plant.id;
                 }
-                Publish(_garden,PUBLIC_TOPIC);
+                Publish(_garden, PUBLIC_TOPIC);
                 currentTime.setToNow();
                 time = "time-" + Integer.toString(currentTime.hour) + ":" + Integer.toString(currentTime.minute);
                 Publish(time, PUBLIC_TOPIC);
@@ -422,7 +437,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getAllPlantsInfor() {
-        for(int i = 0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             plants[i].setName(etPlants[i].getText().toString());
             plants[i].setTimeToWater(etTimeToWater[i].getText().toString());
             plants[i].setTimeToMeasure(Integer.parseInt(etTimeToMeasure[i].getText().toString()));
@@ -530,23 +545,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshNewFeed() {
         if (getCurrentFloor() == 1) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < NUM_OF_POTS; i++) {
                 tvDisplayPlants[i].setText(treePos[i].plant.getName());
                 tvHumidity[i].setText(Integer.toString(treePos[i].hum));
                 switch (treePos[i].plant.id) {
-                    case 0: tvDisplayPlants[i].setTextColor(color1); break;
-                    case 1: tvDisplayPlants[i].setTextColor(color2); break;
-                    case 2: tvDisplayPlants[i].setTextColor(color3); break;
+                    case 0:
+                        tvDisplayPlants[i].setTextColor(color1);
+                        break;
+                    case 1:
+                        tvDisplayPlants[i].setTextColor(color2);
+                        break;
+                    case 2:
+                        tvDisplayPlants[i].setTextColor(color3);
+                        break;
                 }
             }
         } else {
-            for (int i = 0; i < 3; i++) {
-                tvDisplayPlants[i].setText(treePos[i+3].plant.getName());
-                tvHumidity[i].setText(Integer.toString(treePos[i+3].hum));
-                switch (treePos[i+3].plant.id) {
-                    case 0: tvDisplayPlants[i].setTextColor(color1); break;
-                    case 1: tvDisplayPlants[i].setTextColor(color2); break;
-                    case 2: tvDisplayPlants[i].setTextColor(color3); break;
+            for (int i = 0; i < NUM_OF_POTS; i++) {
+                tvDisplayPlants[i].setText(treePos[i + NUM_OF_POTS].plant.getName());
+                tvHumidity[i].setText(Integer.toString(treePos[i + NUM_OF_POTS].hum));
+                switch (treePos[i + NUM_OF_POTS].plant.id) {
+                    case 0:
+                        tvDisplayPlants[i].setTextColor(color1);
+                        break;
+                    case 1:
+                        tvDisplayPlants[i].setTextColor(color2);
+                        break;
+                    case 2:
+                        tvDisplayPlants[i].setTextColor(color3);
+                        break;
                 }
             }
         }
@@ -557,7 +584,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInitializingPlants) {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < NUM_OF_PLANTS; i++) {
 
                         if (plants[i].isChoosing) {
 
@@ -577,8 +604,8 @@ public class MainActivity extends AppCompatActivity {
                                 treePos[0].plant = plants[i].Clone();
                                 tvDisplayPlants[0].setText(treePos[0].plant.getName());
                             } else {
-                                treePos[3].plant = plants[i].Clone();
-                                tvDisplayPlants[0].setText(treePos[3].plant.getName());
+                                treePos[4].plant = plants[i].Clone();
+                                tvDisplayPlants[0].setText(treePos[4].plant.getName());
                             }
                         }
                     }
@@ -587,8 +614,8 @@ public class MainActivity extends AppCompatActivity {
                         moveToPos(0);
                         tvDebug.setText("moving to " + Integer.toString(0));
                     } else {
-                        moveToPos(3);
-                        tvDebug.setText("moving to " + Integer.toString(3));
+                        moveToPos(4);
+                        tvDebug.setText("moving to " + Integer.toString(4));
                     }
                 }
             }
@@ -598,7 +625,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInitializingPlants) {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < NUM_OF_PLANTS; i++) {
                         if (plants[i].isChoosing) {
                             switch (i) {
                                 case 0:
@@ -616,8 +643,8 @@ public class MainActivity extends AppCompatActivity {
                                 treePos[1].plant = plants[i].Clone();
                                 tvDisplayPlants[1].setText(treePos[1].plant.getName());
                             } else {
-                                treePos[4].plant = plants[i].Clone();
-                                tvDisplayPlants[1].setText(treePos[4].plant.getName());
+                                treePos[5].plant = plants[i].Clone();
+                                tvDisplayPlants[1].setText(treePos[5].plant.getName());
                             }
                         }
                     }
@@ -626,8 +653,8 @@ public class MainActivity extends AppCompatActivity {
                         moveToPos(1);
                         tvDebug.setText("moving to " + Integer.toString(1));
                     } else {
-                        moveToPos(4);
-                        tvDebug.setText("moving to " + Integer.toString(4));
+                        moveToPos(5);
+                        tvDebug.setText("moving to " + Integer.toString(5));
                     }
                 }
             }
@@ -637,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isInitializingPlants) {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < NUM_OF_PLANTS; i++) {
                         if (plants[i].isChoosing) {
                             switch (i) {
                                 case 0:
@@ -654,8 +681,8 @@ public class MainActivity extends AppCompatActivity {
                                 treePos[2].plant = plants[i].Clone();
                                 tvDisplayPlants[2].setText(treePos[2].plant.getName());
                             } else {
-                                treePos[5].plant = plants[i].Clone();
-                                tvDisplayPlants[2].setText(treePos[5].plant.getName());
+                                treePos[6].plant = plants[i].Clone();
+                                tvDisplayPlants[2].setText(treePos[6].plant.getName());
                             }
                         }
                     }
@@ -664,8 +691,46 @@ public class MainActivity extends AppCompatActivity {
                         moveToPos(2);
                         tvDebug.setText("moving to " + Integer.toString(2));
                     } else {
-                        moveToPos(5);
-                        tvDebug.setText("moving to " + Integer.toString(5));
+                        moveToPos(6);
+                        tvDebug.setText("moving to " + Integer.toString(6));
+                    }
+                }
+            }
+        });
+
+        plantsLayout[3].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isInitializingPlants) {
+                    for (int i = 0; i < NUM_OF_PLANTS; i++) {
+                        if (plants[i].isChoosing) {
+                            switch (i) {
+                                case 0:
+                                    tvDisplayPlants[3].setTextColor(color1);
+                                    break;
+                                case 1:
+                                    tvDisplayPlants[3].setTextColor(color2);
+                                    break;
+                                case 2:
+                                    tvDisplayPlants[3].setTextColor(color3);
+                                    break;
+                            }
+                            if (getCurrentFloor() == 1) {
+                                treePos[3].plant = plants[i].Clone();
+                                tvDisplayPlants[3].setText(treePos[3].plant.getName());
+                            } else {
+                                treePos[7].plant = plants[i].Clone();
+                                tvDisplayPlants[3].setText(treePos[7].plant.getName());
+                            }
+                        }
+                    }
+                } else {
+                    if (getCurrentFloor() == 1) {
+                        moveToPos(3);
+                        tvDebug.setText("moving to " + Integer.toString(3));
+                    } else {
+                        moveToPos(7);
+                        tvDebug.setText("moving to " + Integer.toString(7));
                     }
                 }
             }
@@ -690,24 +755,17 @@ public class MainActivity extends AppCompatActivity {
         String pos;
         String _move = "move";
         pos = "p-" + Integer.toString(_pos);
-        Publish(pos,PUBLIC_TOPIC);
+        Publish(pos, PUBLIC_TOPIC);
         Publish(_move, PUBLIC_TOPIC);
     }
 
     public int getCurrentFloor() {
         return this.floorNum;
     }
+
     public int getCurrentPos() {
         return this.currentPos;
     }
-    public void equalsWith(Plants _plant1, Plants _plant2) {
-        _plant1.name = _plant2.name;
-        _plant1.hour = _plant2.hour;
-        _plant1.minute = _plant2.minute;
-        _plant1.intervalToMeasure = _plant2.intervalToMeasure;
-        _plant1.waterDuration = _plant2.waterDuration;
-        _plant1.humidity = _plant2.humidity;
-        _plant1.id = _plant2.id;
-        _plant1.minHumidity = _plant2.minHumidity;
-    }
+
+
 }

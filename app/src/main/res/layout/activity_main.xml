@@ -421,236 +421,276 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"
+            android:layout_weight="0.45"
             android:clickable="false"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:clickable="false"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:clickable="false"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="3"
+                    android:weightSum="2">
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.75"
-                        android:orientation="vertical"
-                        android:weightSum="4">
-
-                        <Spinner
-                            android:id="@+id/sp_floor_num_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
-
-                        <ImageButton
-                            android:id="@+id/ib_plant_1_id"
-                            style="@style/Widget.AppCompat.ImageButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/holo_blue_bright" />
-
-                        <ImageButton
-                            android:id="@+id/ib_plant_2_id"
-                            style="@style/Widget.AppCompat.ImageButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/holo_green_light" />
-
-                        <ImageButton
-                            android:id="@+id/ib_plant_3_id"
-                            style="@style/Widget.AppCompat.ImageButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:background="@android:color/holo_orange_light" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ln_plant_1_id"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3.5"
-                        android:clickable="true"
-                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:weightSum="2">
-
-                        <TextView
-                            android:id="@+id/_tv_plant_name_1_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:gravity="bottom|center"
-                            android:text="Xà lách"
-                            android:textSize="18sp" />
-
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
+                            android:id="@+id/ln_plant_1_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal"
+                            android:clickable="true"
+                            android:orientation="vertical"
                             android:weightSum="2">
 
                             <TextView
-                                android:id="@+id/tv_hum_1_id"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
+                                android:id="@+id/_tv_plant_name_1_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
                                 android:layout_weight="1"
-                                android:gravity="top|right"
-                                android:text="40" />
+                                android:gravity="bottom|center"
+                                android:text="Xà lách"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:id="@+id/tv_hum_1_id"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="top|right"
+                                    android:text="40" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="top|left"
+                                    android:paddingLeft="3dp"
+                                    android:text="%" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln_plant_2_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
+                                android:id="@+id/_tv_plant_name_2_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
                                 android:layout_weight="1"
-                                android:gravity="top|left"
-                                android:paddingLeft="3dp"
-                                android:text="%" />
+                                android:gravity="bottom|right"
+                                android:paddingRight="30dp"
+                                android:text="Rau cải"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:id="@+id/tv_hum_2_id"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|right"
+                                    android:text="40" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|left"
+                                    android:paddingLeft="3dp"
+                                    android:text="%" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:weightSum="2">
+                        <LinearLayout
+                            android:id="@+id/ln_plant_3_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/_tv_plant_name_3_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="bottom|left"
+                                android:paddingLeft="30dp"
+                                android:text="Rau muống"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:id="@+id/tv_hum_3_id"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|right"
+                                    android:text="40" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|left"
+                                    android:paddingLeft="3dp"
+                                    android:text="%" />
+                            </LinearLayout>
+                        </LinearLayout>s
+
+                        <LinearLayout
+                            android:id="@+id/ln_plant_4_id"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:orientation="vertical"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/_tv_plant_name_4_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="bottom|left"
+                                android:paddingLeft="30dp"
+                                android:text="Rau khoai"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:id="@+id/tv_hum_4_id"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|right"
+                                    android:text="40" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.5"
+                                    android:gravity="top|left"
+                                    android:paddingLeft="3dp"
+                                    android:text="%" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:weightSum="12">
+
+                    <Spinner
+                        android:id="@+id/sp_floor_num_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.75" />
+
+                    <ImageButton
+                        android:id="@+id/ib_plant_1_id"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="1.75"
-                        android:orientation="vertical">
+                        android:background="@android:color/holo_blue_bright" />
 
-                        <Button
-                            android:id="@+id/bt_upload_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Upload"
-                            android:textAppearance="@style/TextAppearance.AppCompat"
-                            android:textSize="12sp" />
+                    <ImageButton
+                        android:id="@+id/ib_plant_2_id"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.75"
+                        android:background="@android:color/holo_green_light" />
 
-                        <Button
-                            android:id="@+id/bt_home"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="Home"
-                            android:textAppearance="@style/TextAppearance.AppCompat"
-                            android:textSize="14sp" />
+                    <ImageButton
+                        android:id="@+id/ib_plant_3_id"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.75"
+                        android:background="@android:color/holo_orange_light" />
 
-                    </LinearLayout>
+                    <Button
+                        android:id="@+id/bt_upload_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.5"
+                        android:gravity="center"
+                        android:text="Upload"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/bt_home"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2.5"
+                        android:gravity="center"
+                        android:text="Home"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:clickable="false"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:id="@+id/ln_plant_2_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/_tv_plant_name_2_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="bottom|right"
-                        android:paddingRight="30dp"
-                        android:text="Rau cải"
-                        android:textSize="18sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <TextView
-                            android:id="@+id/tv_hum_2_id"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.7"
-                            android:gravity="top|right"
-                            android:text="40" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="top|left"
-                            android:paddingLeft="3dp"
-                            android:text="%" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ln_plant_3_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:id="@+id/_tv_plant_name_3_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="bottom|left"
-                        android:paddingLeft="30dp"
-                        android:text="Rau muống"
-                        android:textSize="18sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <TextView
-                            android:id="@+id/tv_hum_3_id"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.3"
-                            android:gravity="top|right"
-                            android:text="40" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.7"
-                            android:gravity="top|left"
-                            android:paddingLeft="3dp"
-                            android:text="%" />
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

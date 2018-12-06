@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SAGT</string>
     <string-array name="floorNumArray">
-        <item>1</item>
-        <item>2</item>
+        <item>Tầng 1</item>
+        <item>Tầng 2</item>
     </string-array>
 </resources>
